@@ -1,0 +1,6 @@
+[sqlfluff]
+verbose = 0
+dialect = bigquery
+templater = dbt
+rules = all
+exclude_rules = L014, L016, L018, L022, L034, L036, L051, L054, L044, L039

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bitvavo_assessment
+    tables:
+      - name: staking_rates
+        identifier: raw_staking_rates
+      - name: staking_rewards
+        identifier: raw_staking_rewards

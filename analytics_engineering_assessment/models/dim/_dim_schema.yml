@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: dim_staking_agg_day
+    description: "A model that aggregates data from the `dim_assets_merged` table, grouping by date, day of the week, week of the year, ISO week start date, and asset hold status, and calculating the sum of staked amounts."
+    columns:
+      - name: dateDay
+        description: "The date for each entry, representing a specific day."
+      - name: dayOfWeekIso
+        description: "The ISO day of the week, where 1 represents Monday and 7 represents Sunday."
+      - name: weekOfYear
+        description: "The week of the year, calculated according to the ISO week date system."
+      - name: isoWeekStartDate
+        description: "The start date of the ISO week, typically a Monday."
+      - name: assetHold
+        description: "Indicates name of the asset held."
+      - name: stakedAmountSum
+        description: "The sum of staked amounts for the given grouping, calculated by summing `stakedAmount` from `dim_assets_merged`."
+  - name: dim_assets_merged
+    description: "A model that joins information about staking rate with staking rewards per assets, day, stakingPrimaryKey"
+    columns:
+      - name: dateDay
+        description: "The specific day associated with asset staking and rewards."
+      - name: dayOfWeekIso
+        description: "ISO day of the week."
+      - name: weekOfYear
+        description: "The week number within the year."
+      - name: isoWeekStartDate
+        description: "The start date of the ISO week."
+      - name: monthOfYear
+        description: "The month number within the year."
+      - name: yearNumber
+        description: "The year number."
+      - name: stakingPrimaryKey
+        description: "A primary key identifying the staking record."
+      - name: assetHold
+        description: "The asset name."
+      - name: assetReward
+        description: "The reward asset type."
+      - name: startDateStaking
+        description: "The start date of staking."
+      - name: endDateStaking
+        description: "The end date of staking."
+      - name: stakedAmount
+        description: "The amount of asset staked."
+      - name: dailyRewardPerUnit
+        description: "The daily reward amount per unit of staked asset."
+      - name: rewardType
+        description: "The type of reward."
+      - name: rewardPrimaryKey
+        description: "A primary key identifying the reward record."
+      - name: rewardRateForeignKey
+        description: "A foreign key relating the reward to its staking record."
+      - name: rewardAmount
+        description: "The amount of reward."
+  - name: dim_rewards_agg_day
+    description: "A summary of asset rewards by date and asset, including total reward amounts."
+    columns:
+      - name: dateDay
+        description: "The specific day for which data is reported."
+      - name: dayOfWeekIso
+        description: "The ISO standard day of the week."
+      - name: weekOfYear
+        description: "The week of the year."
+      - name: isoWeekStartDate
+        description: "The start date of the ISO week."
+      - name: assetReward
+        description: "A  name of the asset's reward."
+      - name: rewardAmountSum
+        description: "The total sum of rewards for the asset within the specified time frame."

@@ -1,0 +1,111 @@
+version: 2
+
+models:
+  - name: int_staking_rewards
+    description: "Data containing only expected rewards of assets that are staked excluding deleted listings"
+    docs:
+      show: true
+    columns:
+      - name: rewardDate
+        description: "Date of the reward"
+      - name: rewardType
+        description: "Type of reward: expected, realised, correction"
+      - name: rewardPrimaryKey
+        description: "Primary Key"
+      - name: rewardRateForeignKey
+        description: "Foreign Key to reward rates"
+      - name: rewardAmount
+        description: "The amount of crypto assets rewarded"
+
+  - name: int_staking_rates_day
+    description: "This model ranks staking events by their creation timestamp for each asset hold and staking primary key, filtering out deleted listings and keeping only the latest staking record for each day."
+    columns:
+      - name: startDateStaking
+        description: "The start date of the staking period."
+      - name: endDateStaking
+        description: "The end date of the staking period."
+      - name: stakingEventCreationDate
+        description: "The creation date of the staking event."
+      - name: stakingPrimaryKey
+        description: "The primary key of the staking event."
+      - name: assetReward
+        description: "The asset rewarded for staking."
+      - name: assetHold
+        description: "The asset held that qualifies for the staking reward."
+      - name: stakedAmount
+        description: "The amount of the asset that is staked."
+      - name: dailyRewardPerUnit
+        description: "The daily reward per unit of the staked asset."
+      - name: ranking_number
+        description: "The rank of the staking event within the partitioned group, determined by the most recent staking event creation timestamp."
+
+  - name: int_dates
+    description: "A table for date attributes, derived from stg_dates."
+    columns:
+      - name: dateDay
+        description: "The date."
+      - name: dayOfWeekIso
+        description: "The ISO day of the week."
+      - name: weekOfYear
+        description: "The week of the year."
+      - name: isoWeekStartDate
+        description: "The start date of the ISO week."
+      - name: monthOfYear
+        description: "The month of the year."
+      - name: yearNumber
+        description: "The year."
+      - name: quarterOfYear
+        description: "The quarter of the year."
+
+  - name: int_assets_staking_agg
+    description:  "This model ranks staking events by asset hold and staking primary key, providing the nearest staking date, staked amount, and daily reward per unit for each event."
+    columns:
+      - name: dateDay
+        description: "The date of the staking event in a day granularity."
+      - name: dayOfWeekIso
+        description: "The ISO standard day of the week for the staking event."
+      - name: weekOfYear
+        description: "The week of the year for the staking event."
+      - name: isoWeekStartDate
+        description: "The start date of the ISO week for the staking event."
+      - name: monthOfYear
+        description: "The month of the year for the staking event."
+      - name: yearNumber
+        description: "The year of the staking event."
+      - name: stakingPrimaryKey
+        description: "A primary key identifying the staking event."
+      - name: assetHold
+        description: "The asset held that is subject to staking."
+      - name: assetReward
+        description: "The reward asset for staking."
+      - name: startDateStaking
+        description: "The start date of staking."
+      - name: endDateStaking
+        description: "The end date of staking."
+      - name: stakedAmount
+        description: "The amount staked. It defaults to 0 if no staking date is available."
+      - name: dailyRewardPerUnit
+        description: "The daily reward per unit of staked amount. It defaults to 0 if no staking date is available."
+
+  - name: int_assets_empty_array
+    description: "This model creates a cross-joined dataset between dates and unique asset-user combinations from staking rates data. 
+    It is designed to provide a comprehensive view of asset holdings, rewards, and staking activity across all dates in the dataset."
+    columns:
+      - name: dateDay
+        description: "The specific day for which data is being reported, in YYYY-MM-DD format."
+      - name: dayOfWeekIso
+        description: "The ISO day of the week number (1 for Monday, 7 for Sunday)."
+      - name: weekOfYear
+        description: "The week number of the year, according to the ISO standard."
+      - name: isoWeekStartDate
+        description: "The start date of the ISO week for the given dateDay."
+      - name: monthOfYear
+        description: "The month number of the year for the given dateDay (1 for January, 12 for December)."
+      - name: yearNumber
+        description: "The year number for the given dateDay."
+      - name: assetHold
+        description: "The asset that is being held by a user in the context of staking."
+      - name: assetReward
+        description: "The reward asset that a user receives from staking."
+      - name: stakingPrimaryKey
+        description: "A unique identifier for each staking activity or record."

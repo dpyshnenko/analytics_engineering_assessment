@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: stg_staking_rates
+    description: "Data containing contracts of assets that are staked. The grain of the seed is stakingPrimaryKey"
+    columns:
+      - name: startDateStaking
+        description: "Start date of the staking contract"
+      - name: endDateStaking
+        description: "End date of the staking contract"
+      - name: stakingPrimaryKey
+        description: "Primary key"
+        tests:
+          - not_null
+      - name: assetReward
+        description: "Crypto asset that the reward is paid in"
+      - name: assetHold
+        description: "Crypto Asset that is staked"
+        tests:
+          - not_null
+      - name: stakingEventCreationEpoch
+        description: "Staking event creation time in milliseconds since January 1, 1970"
+        tests:
+          - not_null
+      - name: stakingEventCreationTimeStamp
+        description: "Staking event creation time in timestamp"
+      - name: stakedAmount
+        description: "The amount of crypto assets staked"
+      - name: dailyRewardPerUnit
+        description: "The staking daily reward per asset unit staked"
+      - name: isDeleted
+        description: "Boolean that identifies if a records is deleted"
+
+  - name: stg_staking_rewards
+    description: "Data containing rewards of assets that are staked. The grain of the seed is primaryId"
+    columns:
+      - name: rewardDate
+        description: "Date of the reward"
+      - name: rewardType
+        description: "Type of reward: expected, realised, correction"
+      - name: rewardPrimaryKey
+        description: "Primary Key"
+        tests:
+          - not_null
+      - name: rewardRateForeignKey
+        description: "Foreign Key to reward rates"
+        tests:
+          - not_null
+      - name: rewardEventCreationEpoch
+        description: "Reward event creation time in milliseconds since January 1, 1970"
+        tests:
+          - not_null
+      - name: rewardEventCreationTimeStamp
+        description: "Reward event creation time in timestamp"
+      - name: rewardAmount
+        description: "The amount of crypto assets rewarded"
+      - name: isDeleted
+        description: "Boolean that identifies if a records is deleted"
+
+  - name: stg_dates
+    description: "Data containing dates from July 1, 2023, until the current date"
