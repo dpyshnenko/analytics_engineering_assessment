@@ -54,7 +54,7 @@ The final data flow process looks in the following way:
 - For production use, incremental models could be more suitable for storing transactional data. This could enhance performance, only processing new or changed data.
 - Modularity: The dbt tool has been selected as it provides modular components to enable reusability and to make the project easier to navigate and maintain.
 - Documentation: All models are documented in `schema.yml` files, and in-depth explanations are provided within the dbt project's README and inline comments.
-- Version Control: Changes to the dbt project are managed through Git, providing an audit trail and facilitating collaboration.
+- Version Control: Changes to the dbt project are managed [through Git](https://github.com/dpyshnenko/analytics_engineering_assessment), providing an audit trail and facilitating collaboration.
 
 ## Quick Start
 This project has been completed using `dbt` and `BigQuery` tools. Dashboard has been created using `Google Data Studio`.
