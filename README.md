@@ -11,7 +11,7 @@ amount of assets staked and the expected rewards for various cryptocurrencies.
 
 ## Project Goal: 
 To build a small dbt project to answer the following question:
-- How much asset is staked every consecutive day since the first of July 2023 until the current date, 
+- How much asset is staked every consecutive day since the 1st of July 2023 until the current date, 
 and how much reward is expected for each of those consecutive days?
 
 ## Deliverables
@@ -26,7 +26,7 @@ for performance and maintainability.
 ## Assumptions & Observations:
 - The dataset originates from CSV files. The transactional nature of data is not suitable for seed files, so staging models are the first step in the data transformation process, which have been loaded from the BigQuery raw data tables.
 - The project covers the period starting from July 1, 2023, until the current date. However, actual data is available from `2023-07-01` to `2023-11-08`.
-- Only `type: expected` rewards have been used to calculate the total rewards, as `expected` and `realised` require full calendar month. 
+- Only `type: expected` rewards have been used to calculate the total rewards, as `corrected` and `realised` require full calendar month. 
 - Lines with `__deleted = true` have been removed from the data, assuming it provides erroneous data not applicable for the analysis.
 - `stalking_rates` dataset contains duplicate rows that have been excluded from the model. However, it was not possible to determine the reason for the duplicates. 
 - Only assets that are present in `stalking_rates` table have been used to calculate staking rate and total rewards. In the table `stalking_rewards`, there are some cases where assets that are not present: `rewardXx` does not exist in `stalking_rates`. 
